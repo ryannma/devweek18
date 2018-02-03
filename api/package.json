@@ -4,10 +4,10 @@
   "description": "Example application for running a Node Express app on AWS Lambda using Amazon API Gateway.",
   "main": "lambda.js",
   "config": {
-    "s3BucketName": "personal-finance-app",
+    "s3BucketName": "medsync-api",
     "region": "us-east-1",
-    "cloudFormationStackName": "AwsServerlessExpressStack",
-    "functionName": "PersonalFinanceExpressAPI",
+    "cloudFormationStackName": "MedSyncAPIStack",
+    "functionName": "MedSyncAPI",
     "accountId": "851260606239"
   },
   "scripts": {
@@ -38,6 +38,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "aws": "0.0.3-2",
     "aws-serverless-express": "^3.0.0",
     "body-parser": "^1.17.1",
     "compression": "^1.6.2",

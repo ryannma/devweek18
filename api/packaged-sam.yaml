@@ -34,22 +34,22 @@ Outputs:
         - .console.aws.amazon.com/lambda/home?region=
         - Ref: AWS::Region
         - '#/functions/'
-        - Ref: PersonalFinanceExpressAPI
+        - Ref: MedSyncAPI
 Resources:
   ApiGatewayApi:
     Properties:
-      DefinitionUri: s3://personal-finance-app/253856eaeb1e9fe871438e4ddc9386d4
+      DefinitionUri: s3://medsync-api/253856eaeb1e9fe871438e4ddc9386d4
       StageName: prod
       Variables:
         ServerlessExpressLambdaFunctionName:
-          Ref: PersonalFinanceExpressAPI
+          Ref: MedSyncAPI
     Type: AWS::Serverless::Api
   LambdaApiGatewayExecutionPermission:
     Properties:
       Action: lambda:InvokeFunction
       FunctionName:
         Fn::GetAtt:
-        - PersonalFinanceExpressAPI
+        - MedSyncAPI
         - Arn
       Principal: apigateway.amazonaws.com
       SourceArn:
@@ -85,9 +85,9 @@ Resources:
           Version: '2012-10-17'
         PolicyName: root
     Type: AWS::IAM::Role
-  PersonalFinanceExpressAPI:
+  MedSyncAPI:
     Properties:
-      CodeUri: s3://personal-finance-app/bdc3809ab8f0a7c2024889c9af71aee5
+      CodeUri: s3://medsync-api/a013648aa6f33ecd4a960f2b07481a9a
       Events:
         ProxyApiGreedy:
           Properties:
