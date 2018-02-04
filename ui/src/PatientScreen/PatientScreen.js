@@ -52,7 +52,9 @@ export default class PatientScreen extends Component {
 
   selectLink(e) {
     const val = e._targetInst.memoizedProps.value;
-    console.log(val);
+    const endIndex = val.indexOf('.ttml');
+
+    console.log(val.substring(0, endIndex+5));
   }
 
   render() {
