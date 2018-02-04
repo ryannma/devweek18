@@ -237,8 +237,8 @@ class AudioExample extends Component {
           <View style={styles.controls}>
             {this._renderButton("RECORD", () => {this._record()}, this.state.recording )}
             {this._renderButton("PLAY", () => {this._play()} )}
-            {this._renderButton("STOP", () => {this._stop()} )}
-            {this._renderButton("PAUSE", () => {this._pause()} )}
+            {this._renderButton("SAVE TO NON-PHI STORAGE", () => {this._stop()} )}
+            {this._renderButton("SAVE TO PHI STORAGE", () => {this._pause()} )}
             <Text style={styles.progressText}>{this.state.currentTime}s</Text>
           </View>
         </View>
