@@ -54,11 +54,18 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: ./
+      Environment:
+        Variables:
+          RDS_HOSTNAME: devweek18.cfsyj9wzhife.us-east-1.rds.amazonaws.com
+          RDS_USERNAME: medsync
+          RDS_PASSWORD: 3stoogesunite
+          RDS_PORT: 3306
+          RDS_DATABASE: master
       Handler: lambda.handler
       MemorySize: 1024
       Role: !GetAtt LambdaExecutionRole.Arn
       Runtime: nodejs6.10
-      Timeout: 30
+      Timeout: 20
       Events:
         ProxyApiRoot:
           Type: Api
@@ -72,6 +79,7 @@ Resources:
             RestApiId: !Ref ApiGatewayApi
             Path: /{proxy+}
             Method: ANY
+
 
 Outputs:
   LambdaFunctionConsoleUrl:

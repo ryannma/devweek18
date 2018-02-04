@@ -4,18 +4,31 @@
 // BASE SETUP
 // ==================================================================
 require('module-alias/register')
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const compression = require('compression')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 const app = express()
+const mysql = require('mysql');
 
 app.use(compression())
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(awsServerlessExpressMiddleware.eventContext())
+
+// CONFIGURATION
+// ==================================================================
+const connection = mysql.createConnection({
+  host     : process.env.RDS_HOSTNAME,
+  user     : process.env.RDS_USERNAME,
+  password : process.env.RDS_PASSWORD,
+  port     : process.env.RDS_PORT,
+  database : process.env.RDS_DATABASE
+});
+app.set('db', connection);
 
 
 // ROUTES

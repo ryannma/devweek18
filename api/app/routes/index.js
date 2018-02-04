@@ -8,4 +8,10 @@ router.get('/', (req, res) => {
   res.json({'message': 'Hello World!'});
 });
 
+/**
+ * Set of routes related to user management
+ */
+router.use('/users', require('./users'));
+
+
 module.exports = router

@@ -87,7 +87,14 @@ Resources:
     Type: AWS::IAM::Role
   MedSyncAPI:
     Properties:
-      CodeUri: s3://medsync-api/a013648aa6f33ecd4a960f2b07481a9a
+      CodeUri: s3://medsync-api/12d37b2e6ba8133df98dbf0baf8a4341
+      Environment:
+        Variables:
+          RDS_DATABASE: master
+          RDS_HOSTNAME: devweek18.cfsyj9wzhife.us-east-1.rds.amazonaws.com
+          RDS_PASSWORD: 3stoogesunite
+          RDS_PORT: 3306
+          RDS_USERNAME: medsync
       Events:
         ProxyApiGreedy:
           Properties:
@@ -110,6 +117,6 @@ Resources:
         - LambdaExecutionRole
         - Arn
       Runtime: nodejs6.10
-      Timeout: 30
+      Timeout: 20
     Type: AWS::Serverless::Function
 Transform: AWS::Serverless-2016-10-31
