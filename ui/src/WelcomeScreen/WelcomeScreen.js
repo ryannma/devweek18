@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text } from 'react-native';
+import {StyleSheet, Image, Text } from 'react-native';
 import {Body, Button, Container, Header, Content, Form, Icon, Item, Input, Label, Left, Title} from 'native-base';
 
 export class WelcomeScreen extends Component {
@@ -21,18 +21,19 @@ export class WelcomeScreen extends Component {
   render() {
     return (
       <Container>
-        <Header>
-          <Left>
-            <Button transparent
-                    onPress={() => this.props.navigation.navigate("DrawerOpen")}>
-              <Icon name='menu' />
-            </Button>
-          </Left>
-          <Body>
-            <Title>MedSync</Title>
-          </Body>
-        </Header>
         <Content>
+        <Image
+              source={{
+                uri: "https://image.ibb.co/b8dqdx/Screen_Shot_2018_02_04_at_11_21_02_AM.png"
+              }}
+              style={{
+                height: 100,
+                alignSelf: "stretch" ,
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: 30
+              }}>
+          </Image>
           <Form>
             <Item floatingLabel>
               <Label>Username</Label>
