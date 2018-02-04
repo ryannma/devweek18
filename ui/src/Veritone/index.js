@@ -176,23 +176,39 @@ class AudioExample extends Component {
     _finishRecording(didSucceed, filePath) {
       this.setState({ finished: didSucceed });
       const url = 'https://api.veritone.com/v3/graphql';
+      const headersObj = {
+          Authorization: 'Bearer 23ff3a:c04594f5024a4b949b966e91caf7ae55aa5695c3be754bb888d064e73b490f10',
+          'Content-Type': 'application/json'
+        }
 
       // Create the TDO Object
       fetch(url, {
         method: 'POST',
-        headers: {
-          Authorization: 'Bearer 23ff3a:c04594f5024a4b949b966e91caf7ae55aa5695c3be754bb888d064e73b490f10',
-          'Content-Type': 'application/json'
-        },
+        headers: headersObj,
         body: JSON.stringify({"query": "mutation {createTDO(input: { startDateTime: \"2018-01-01T10:00:00\"stopDateTime: \"2018-01-01T11:00:00\"}) { id startDateTime stopDateTime}}"})
       })
       .then(res => {
         const tdoID = JSON.parse(res._bodyText).data.createTDO.id;
-
-        // Upload the file
-        // JSON.stringify({"query": "mutation { createAsset(input: { containerId: \"52359027\",  assetType: \"media\", contentType: \"video/aac\", uri: \"<file path goes here>\" }) { id } }"})
         console.log(tdoID);
-      })
+        // Upload the file
+        fetch(url, {
+          method: 'POST',
+          headers: headersObj,
+          body: JSON.stringify({"query": "mutation { createAsset(input: { containerId: \""+tdoID+"\",  assetType: \"media\", contentType: \"video/aac\", uri: \"https://archive.org/download/MLKDream/MLKDream_64kb.mp3\" }) { id } }"})
+        })
+        .then(res => {
+          const assetID = JSON.parse(res._bodyText).data.createAsset.id;
+          fetch(url, {
+            method: 'POST',
+            headers: headersObj,
+            body: JSON.stringify({"query": "mutation { createJob(input: { targetId: \""+tdoID+"\",  tasks: [{ engineId: \"120244fe-3ea7-435e-85f6-22d9aab614ba\" }] }) { id } }"})
+          })
+          .then(res => {
+            const createJobID = JSON.parse(res._bodyText).data.createJob.id;
+            console.log(createJobID);
+          });
+        });
+      });
       // const data = new FormData();
       // data.append('file', {
       //   uri: filePath,
