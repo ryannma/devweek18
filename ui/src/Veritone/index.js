@@ -114,7 +114,6 @@ class AudioExample extends Component {
 
       try {
         const filePath = await AudioRecorder.stopRecording();
-
         if (Platform.OS === 'android') {
           this._finishRecording(true, filePath);
         }

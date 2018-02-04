@@ -54,7 +54,7 @@ export default (PatientScreenNavigator = TabNavigator(
               vertical
               active={props.navigationState.index === 3}
               onPress={() => props.navigation.navigate('AudioExample')}>
-              <Icon name='fa-headphones' />
+              <Icon name='microphone' />
               <Text>Audio</Text>
             </Button>
 
