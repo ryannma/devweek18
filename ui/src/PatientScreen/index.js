@@ -13,6 +13,7 @@ import {
 import PatientScreen from './PatientScreen.js'
 import JadeChat from './WriteShit.js'
 import AgoraComponent from '../Agora/AgoraComponent';
+import AudioExample from '../Veritone';
 
 
 export default (PatientScreenNavigator = TabNavigator(
@@ -20,6 +21,7 @@ export default (PatientScreenNavigator = TabNavigator(
     PatientScreen: {screen: PatientScreen},
     JadeChat: {screen: JadeChat},
     AgoraComponent: {screen: AgoraComponent},
+    AudioExample: {screen: AudioExample}
   },
   {
     tabBarPosition: 'bottom',
@@ -48,6 +50,14 @@ export default (PatientScreenNavigator = TabNavigator(
               <Icon name='headset' />
               <Text>Defib</Text>
             </Button>
+            <Button
+              vertical
+              active={props.navigationState.index === 3}
+              onPress={() => props.navigation.navigate('AudioExample')}>
+              <Icon name='fa-headphones' />
+              <Text>Audio</Text>
+            </Button>
+
           </FooterTab>
         </Footer>
       );
