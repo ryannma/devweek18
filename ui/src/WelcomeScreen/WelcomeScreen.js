@@ -14,7 +14,7 @@ export class WelcomeScreen extends Component {
   changeUsername(e) {
     console.log(JSON.stringify(e, null, 2));
     this.setState({
-      patientId: e.value
+      username: e.value
     });
   }
 
