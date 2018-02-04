@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { AppRegistry, Image, ReactNative, findNodeHandle, StyleSheet} from 'react-native';
 
-import SurfaceView from './components/SurfaceView.js';
-import APPID from './components/Constants.js';
-import RtcEnine from './components/RtcEngine.js';
+import SurfaceView from './components/android/SurfaceView.js';
+import APPID from './components/android/Constants.js';
+import RtcEnine from './components/android/RtcEngine.js';
 
 export default class AgoraComponent extends Component<{}> {
   componentDidMount() {

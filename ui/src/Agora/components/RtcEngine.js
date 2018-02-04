@@ -1,7 +1,7 @@
 'use strict';
 
-import AgoraModule from './AgoraAndroidModule'
-import SurfaceView from './SurfaceView'
+import AgoraModule from './android/AgoraAndroidModule'
+import SurfaceView from './android/SurfaceView'
 
 import {
     Alert,
@@ -13,13 +13,13 @@ import {
 var RtcEnine = {
     create(appId: string, callback: any) {
         DeviceEventEmitter.addListener('onJoinChannelSuccess', (data) => {
-            if (typeof callback['onJoinChannelSuccess'] === 'undefined'){
+            if (typeof callback['onJoinChannelSuccess'] === "undefined"){
                 return
             }
             callback['onJoinChannelSuccess'](data.p0, data.p1, data.p2, data.p3)
         })
         DeviceEventEmitter.addListener('onUserJoined', (data) => {
-            if (typeof callback['onUserJoined'] === 'undefined'){
+            if (typeof callback['onUserJoined'] === "undefined"){
                 return
             }
             callback['onUserJoined'](data.p0, data.p1)
@@ -28,7 +28,7 @@ var RtcEnine = {
         /*
         for(var p in callback) {
             DeviceEventEmitter.addListener(p, (data) => {
-                if (typeof callback[p] === 'undefined'){
+                if (typeof callback[p] === "undefined"){
                     return
                 }
                 var n = callback[p].length
@@ -58,7 +58,7 @@ var RtcEnine = {
                 //Alert.alert(callback[data.type].length + '')
                 //callback[data.type](data.channel, data.uid, data.elapsed)
             //}
-            if (typeof callback[data.type] === 'undefined'){
+            if (typeof callback[data.type] === "undefined"){
                 return
             }
         });
