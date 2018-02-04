@@ -2,31 +2,16 @@ import React, { Component } from 'react';
 import {StyleSheet, Text } from 'react-native';
 import {Body, Button, Container, Header, Content, Form, Icon, Item, Input, Label, Left, Title} from 'native-base';
 
-export default class RegularTextboxExample extends Component {
-  render() {
-    return (
-      <Container>
-        <Header />
-        <Content>
-          <Item regular>
-            <Input placeholder='Regular Textbox' />
-          </Item>
-        </Content>
-      </Container>
-    );
-  }
-}
-
-export class WelcomePage extends Component {
+export class WelcomeScreen extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      patientId: ''
+      username: ''
     }
   }
 
-  changePatientId(e) {
+  changeUsername(e) {
     console.log(JSON.stringify(e, null, 2));
     this.setState({
       patientId: e.value
@@ -38,7 +23,7 @@ export class WelcomePage extends Component {
       <Container>
         <Header>
           <Left>
-            <Button transpare nt>
+            <Button transparent>
               <Icon name='menu' />
             </Button>
           </Left>
@@ -49,10 +34,18 @@ export class WelcomePage extends Component {
         <Content>
           <Form>
             <Item floatingLabel>
-              <Label>Enter Patient Id</Label>
-              <Input value={this.state.patientId} 
-                     onChangeText={this.changePatientId.bind(this)}/>
+              <Label>Username</Label>
+              <Input value={this.state.username} 
+                     onChangeText={this.changeUsername.bind(this)}/>
             </Item>
+            <Item floatingLabel>
+              <Label>Password</Label>
+              <Input/>
+            </Item>
+            <Button primary
+                    onPress={() => this.props.navigation.navigate("Patient")}>
+              <Text> Log In </Text>
+            </Button>
           </Form>
         </Content>
       </Container>
@@ -68,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-module.exports = WelcomePage;
+module.exports = WelcomeScreen;
