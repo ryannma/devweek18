@@ -14,13 +14,11 @@ router.param('userId', (req, res, next, id) => {
 router.get('/db', (req, res) => {
   const db = req.app.get('db');
   db.connect(function(err) {
-    console.log(err);
     if (err) {
       console.log('Error in connecting');
       console.error('Database connection failed: ' + err.stack);
       return;
     }
-    console.log('Connected')
     res.status(200);
     res.json('Connected to database.');
   });
