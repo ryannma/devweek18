@@ -30,19 +30,19 @@ export default class JadeChat extends Component {
       <Container>
         <Header backgroundColor='#34d19a'>
           <Body>
-            <Title>Nine Chat</Title>
+            <Title>Patient Profile</Title>
           </Body>
         </Header>
         <Content padder>
           <Item floatingLabel style={{ marginTop: 20 }}>
-            <Label>Nine Chat</Label>
+            <Label>Patient Profile</Label>
             <Input />
           </Item>
           <Button
             rounded
             success
             style={{ marginTop: 20, alignSelf: 'center' }}>
-            <Text>Goto Nine Profile</Text>
+            <Text>Goto Online Profile</Text>
           </Button>
         </Content>
       </Container>
