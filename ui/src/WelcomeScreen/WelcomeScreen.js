@@ -41,7 +41,7 @@ export class WelcomeScreen extends Component {
             </Item>
             <Item floatingLabel>
               <Label>Password</Label>
-              <Input/>
+              <Input secureTextEntry={true}/>
             </Item>
             <Button rounded light block style={{marginTop: 25, marginLeft: 25, marginRight: 25}}
                     onPress={() => this.props.navigation.navigate('Patient')}>
