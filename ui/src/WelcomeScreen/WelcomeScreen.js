@@ -23,7 +23,8 @@ export class WelcomeScreen extends Component {
       <Container>
         <Header>
           <Left>
-            <Button transparent>
+            <Button transparent
+                    onPress={() => this.props.navigation.navigate("DrawerOpen")}>
               <Icon name='menu' />
             </Button>
           </Left>
