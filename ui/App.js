@@ -5,12 +5,11 @@
  */
 
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Container, Content, InputGroup } from 'native-base';
+
+import WelcomePage from './src/welcomePage.js';
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -20,19 +19,21 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        patientId: '',
+    }
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+      <Container>
+        <Content>
+          <WelcomePage></WelcomePage>
+        </Content>
+      </Container>
     );
   }
 }
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
+    fontSize: 40,
     textAlign: 'center',
     margin: 10,
   },
