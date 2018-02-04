@@ -85,6 +85,7 @@ export default class PatientScreen extends Component {
   }
 
   render() {
+
     if (!this.state.isLoading) {
       var results = this.state.results;
       return (
