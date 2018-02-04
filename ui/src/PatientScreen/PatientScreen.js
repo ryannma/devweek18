@@ -117,7 +117,7 @@ export default class PatientScreen extends Component {
             <Card>
                 <CardItem>
                   <Body>
-                    <Text>Discussions</Text>
+                    <Text>Clinical Notes</Text>
                   </Body>
                   <Right>
                     <Button transparent
