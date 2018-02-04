@@ -34,21 +34,21 @@ export default (PatientScreenNavigator = TabNavigator(
               active={props.navigationState.index === 0}
               onPress={() => props.navigation.navigate('JadeChat')}>
               <Icon name='bowtie' />
-              <Text>Lobotomy</Text>
+              <Text>Telesign</Text>
             </Button>
             <Button
               vertical
               active={props.navigationState.index === 1}
               onPress={() => props.navigation.navigate('PatientScreen')}>
               <Icon name='briefcase' />
-              <Text>Amputate</Text>
+              <Text>Results</Text>
             </Button>
             <Button
               vertical
               active={props.navigationState.index === 2}
               onPress={() => props.navigation.navigate('AgoraComponent')}>
               <Icon name='headset' />
-              <Text>Defib</Text>
+              <Text>Consult</Text>
             </Button>
             <Button
               vertical

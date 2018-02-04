@@ -42,7 +42,7 @@ export class WelcomeScreen extends Component {
               <Label>Password</Label>
               <Input/>
             </Item>
-            <Button primary
+            <Button rounded light block style={{marginTop: 25, marginLeft: 25, marginRight: 25}}
                     onPress={() => this.props.navigation.navigate('Patient')}>
               <Text> Log In </Text>
             </Button>
