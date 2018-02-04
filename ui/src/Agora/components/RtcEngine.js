@@ -14,8 +14,10 @@ var RtcEnine = {
     create(appId: string, callback: any) {
         DeviceEventEmitter.addListener('onJoinChannelSuccess', (data) => {
             if (typeof callback['onJoinChannelSuccess'] === "undefined"){
+                console.log('undefined join channel');
                 return
             }
+            console.log('success join channel');
             callback['onJoinChannelSuccess'](data.p0, data.p1, data.p2, data.p3)
         })
         DeviceEventEmitter.addListener('onUserJoined', (data) => {
@@ -65,6 +67,10 @@ var RtcEnine = {
     },
     
     setupLocalVideo(view: SurfaceView, width: number, height: height, uid: number) {
+        console.log('view', view);
+        console.log('findNodeHandle', findNodeHandle(view));
+        console.log('2nd', UIManager.SurfaceView.Commands.localVideo);
+        console.log('whu', [width, height, uid]);
         UIManager.dispatchViewManagerCommand(
             findNodeHandle(view),
             UIManager.SurfaceView.Commands.localVideo,

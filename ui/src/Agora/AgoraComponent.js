@@ -32,21 +32,24 @@ export default class AgoraComponent extends Component<{}> {
 
   render() {
     //AgoraModule.show('Call java method', AgoraModule.SHORT);
-
+    console.log('rendering');
     var handler = {
       'onJoinChannelSuccess': (channel, uid, elapsed) => {
+      	console.log('success');
       },
       'onRejoinChannelSuccess': (channel, uid, elapsed) => {
       },
       'onError': (error) => {
+        console.log('error');
       },
       'onUserJoined': (uid, elapsed) => {
+      	console.log('user joined');
         RtcEnine.setupRemoteVideo(this._remoteView1, 96, 96, uid)
       },
       'onUserOffline': (uid, reason) => {
       },
       'onFirstRemoteVideoDecoded': (uid, width, height, elapsed) => {
-         //RtcEnine.setupRemoteVideo(this._remoteView1, 96, 96, uid)
+        // RtcEnine.setupRemoteVideo(this._remoteView1, 96, 96, uid)
       },
     };
     RtcEnine.create(APPID, handler);
