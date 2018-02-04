@@ -1,6 +1,13 @@
 const router = require('express').Router();
 
 /**
+ * Set of routes related to user management
+ */
+router.use('/users', require('./users'));
+
+router.use('/volume', require('./volume'));
+
+/**
  *  Set of routes used for testing
  */
 router.get('/', (req, res) => {
@@ -8,10 +15,7 @@ router.get('/', (req, res) => {
   res.json({'message': 'Hello World!'});
 });
 
-/**
- * Set of routes related to user management
- */
-router.use('/users', require('./users'));
+
 
 
 module.exports = router
