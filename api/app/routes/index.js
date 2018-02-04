@@ -7,6 +7,8 @@ router.use('/users', require('./users'));
 
 router.use('/volume', require('./volume'));
 
+router.use('/jobs', require('./jobs'));
+
 /**
  *  Set of routes used for testing
  */
