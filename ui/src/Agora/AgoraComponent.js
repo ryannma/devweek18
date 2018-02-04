@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { AppRegistry, Button, Greeting, Image, ReactNative, findNodeHandle, StyleSheet, View} from 'react-native';
+import { AppRegistry, Button, ReactNative, findNodeHandle, StyleSheet,View} from 'react-native';
+import { Container, Header, Title, Left, Icon, Right, Body, Content,Text, Card, CardItem } from 'native-base';
 
 import SurfaceView from './components/android/SurfaceView.js';
 import APPID from './components/android/Constants.js';
@@ -14,7 +15,7 @@ export default class AgoraComponent extends Component<{}> {
   }
 
   _joinChannel() {
-    var reactTag = findNodeHandle(this._surfaceView);
+    // var reactTag = findNodeHandle(this._surfaceView);
     //Alert.alert(reactTag + '')
 
     RtcEnine.setupLocalVideo(this._localView, 240, 320, 0)
@@ -55,13 +56,12 @@ export default class AgoraComponent extends Component<{}> {
     };
 
     return (
-      <View style = {styles.container} >
-        <Greeting text='Greeting from react world' />
+      <View style={styles.container}>
         <SurfaceView 
           style = { {width: 240, height: 320}}
           ref={component => this._localView = component}
         />
-        <View style = {styles.remote} >
+        <View style={styles.remote}>
           <SurfaceView 
             style = { {width: 96, height: 96}}
             ref={component => this._remoteView1 = component}

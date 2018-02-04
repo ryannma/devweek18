@@ -12,7 +12,7 @@ import {
 
 import PatientScreen from './PatientScreen.js'
 import JadeChat from './WriteShit.js'
-import {AgoraComponent} from '../Agora/AgoraComponent.js';
+import AgoraComponent from '../Agora/AgoraComponent';
 
 
 export default (PatientScreenNavigator = TabNavigator(
