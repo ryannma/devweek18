@@ -28,7 +28,7 @@ export default class JadeChat extends Component {
     const { navigate } = this.props.navigation;
     return (
       <Container>
-        <Header>
+        <Header backgroundColor='#34d19a'>
           <Body>
             <Title>Nine Chat</Title>
           </Body>

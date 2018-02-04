@@ -23,26 +23,39 @@ export default class PatientScreen extends Component {
     })
     .then((response) => response.json())
     .then((responseJson) => {
-      console.log('here we go');
-      for (var i=0; i<responseJson.length; i++) {
-        if (responseJson[i].result !== null) {
-          this.state.results.push(
-            <Button title="Click me" 
-                    key={i}
-                    onPress={ ()=>{ Linking.openURL('https://google.com')}}/>
-          );
+      let resultArray = [];
+      console.log(JSON.stringify(responseJson, null, 2));
+      responseJson.forEach(row => {
+        if (row.result) {
+          resultArray.push({id: row.id, jobID: row.jobID, tdoID: row.tdoID, link: row.result});
         }
-      }
-      this.state.isLoading=false;
-      console.log(this.state.results);
+      });
+      this.setState({
+        results: resultArray,
+        isLoading: false
+      });
+      // for (var i=0; i<responseJson.length; i++) {
+      //   if (responseJson[i].result !== null) {
+      //     this.state.results.push(
+      //       <Button title="Click me" 
+      //               key={i}
+      //               onPress={ ()=>{ Linking.openURL('https://google.com')}}/>
+      //     );
+      //   }
+      // }
+      // this.state.isLoading=false;
     })
     .catch((error) => {
       console.error(error);
     });;
   }
 
+  selectLink(e) {
+    const val = e._targetInst.memoizedProps.value;
+    console.log(val);
+  }
+
   render() {
-    this.fetchJobs();
     if (!this.state.isLoading) {
       var results = this.state.results;
       return (
@@ -66,7 +79,21 @@ export default class PatientScreen extends Component {
               </CardItem>
             </Card>
             <Card>
-            {results}
+            {this.state.results.map((result, index) => {
+              return (
+                <CardItem key={index}>
+                  <Button transparent
+                          info
+                          onPress={this.selectLink.bind(this)}
+                          value={result.link}>
+                    <Text>{result.link.substring(0, 35)+'...'}</Text>
+                  </Button>
+                  <Right>
+                      <Icon name='arrow-forward'/>
+                    </Right>
+                </CardItem>
+                );
+            })}
             </Card>
           </Content>
         </Container>
