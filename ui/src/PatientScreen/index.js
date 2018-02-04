@@ -33,8 +33,8 @@ export default (PatientScreenNavigator = TabNavigator(
               vertical
               active={props.navigationState.index === 0}
               onPress={() => props.navigation.navigate('JadeChat')}>
-              <Icon name='bowtie' />
-              <Text>Telesign</Text>
+              <Icon name='md-person' />
+              <Text>Profile</Text>
             </Button>
             <Button
               vertical
@@ -53,9 +53,16 @@ export default (PatientScreenNavigator = TabNavigator(
             <Button
               vertical
               active={props.navigationState.index === 3}
+              onPress={() => props.navigation.navigate('JadeChat')}>
+              <Icon name='md-paper'/>
+              <Text>Write</Text>
+            </Button>
+            <Button
+              vertical
+              active={props.navigationState.index === 3}
               onPress={() => props.navigation.navigate('AudioExample')}>
               <Icon name='microphone' />
-              <Text>Audio</Text>
+              <Text>Record</Text>
             </Button>
 
           </FooterTab>
