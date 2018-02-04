@@ -3,7 +3,7 @@ const request = require('request-promise');
 
 router.get('/refresh', (req, res) => {
   const db = req.app.get('db');
-  const sql = 'SELECT * FROM jobs WHERE status=\'pending\'';
+  const sql = 'SELECT * FROM jobs WHERE status in (\'pending\', \'running\')';
   db.query(sql, (err, rv) => {
     rv.map(row => {
       const jobID = JSON.parse(JSON.stringify(row)).jobID;
@@ -38,6 +38,7 @@ router.get('/update', (req, res) => {
   const sql = 'SELECT * FROM jobs WHERE status = \'complete\' AND result is null';
   db.query(sql, (err, rv) => {
     rv.map(row => {
+      console.log(row);
       const tdoID = JSON.parse(JSON.stringify(row)).tdoID;
       const options = {
         method: 'POST',
@@ -53,9 +54,9 @@ router.get('/update', (req, res) => {
       request(options)
         .then(data => {
           const transcript = JSON.parse(data).data.temporalDataObject.assets.records[1].signedUri;
-          console.log(transcript);
           const updateSql = 'UPDATE jobs SET result = ? WHERE tdoID = \'' + tdoID + '\'';
           db.query(updateSql, [transcript], (err,rv) => {
+            console.log(rv);
           });
         });
     });
