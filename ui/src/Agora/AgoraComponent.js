@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { AppRegistry, Image, ReactNative, findNodeHandle, StyleSheet} from 'react-native';
+import { AppRegistry, Button, Greeting, Image, ReactNative, findNodeHandle, StyleSheet, View} from 'react-native';
 
 import SurfaceView from './components/android/SurfaceView.js';
 import APPID from './components/android/Constants.js';
-import RtcEnine from './components/android/RtcEngine.js';
+import RtcEnine from './components/RtcEngine.js';
 
 export default class AgoraComponent extends Component<{}> {
   componentDidMount() {
@@ -56,7 +56,7 @@ export default class AgoraComponent extends Component<{}> {
 
     return (
       <View style = {styles.container} >
-        <Greeeting text='Greeting from react world' />
+        <Greeting text='Greeting from react world' />
         <SurfaceView 
           style = { {width: 240, height: 320}}
           ref={component => this._localView = component}

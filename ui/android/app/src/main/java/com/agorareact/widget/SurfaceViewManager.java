@@ -3,15 +3,11 @@ package com.agorareact.widget;
 import android.util.Log;
 import android.view.SurfaceView;
 
-import com.agorareact.AgoraPackage;
-import com.agorareact.MainApplication;
 import com.agorareact.modules.AgoraModule;
-import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.annotations.ReactProp;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;

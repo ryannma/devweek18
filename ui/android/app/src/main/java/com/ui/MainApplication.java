@@ -2,8 +2,8 @@ package com.ui;
 
 import android.app.Application;
 
+import com.agorareact.AgoraPackage;
 import com.facebook.react.ReactApplication;
-import com.syan.agora.AgoraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;

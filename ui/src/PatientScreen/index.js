@@ -12,14 +12,14 @@ import {
 
 import PatientScreen from './PatientScreen.js'
 import JadeChat from './WriteShit.js'
-import AgoraLauncher from '../Agora/AgoraComponent.js';
+import {AgoraComponent} from '../Agora/AgoraComponent.js';
 
 
 export default (PatientScreenNavigator = TabNavigator(
   {
     PatientScreen: {screen: PatientScreen},
     JadeChat: {screen: JadeChat},
-    AgoraLauncher: {screen: AgoraLauncher},
+    AgoraComponent: {screen: AgoraComponent},
   },
   {
     tabBarPosition: 'bottom',
@@ -44,7 +44,7 @@ export default (PatientScreenNavigator = TabNavigator(
             <Button
               vertical
               active={props.navigationState.index === 2}
-              onPress={() => props.navigation.navigate('AgoraLauncher')}>
+              onPress={() => props.navigation.navigate('AgoraComponent')}>
               <Icon name='headset' />
               <Text>Defib</Text>
             </Button>
