@@ -189,12 +189,11 @@ class AudioExample extends Component {
       })
       .then(res => {
         const tdoID = JSON.parse(res._bodyText).data.createTDO.id;
-        console.log(tdoID);
         // Upload the file
         fetch(url, {
           method: 'POST',
           headers: headersObj,
-          body: JSON.stringify({"query": "mutation { createAsset(input: { containerId: \""+tdoID+"\",  assetType: \"media\", contentType: \"video/aac\", uri: \"https://archive.org/download/MLKDream/MLKDream_64kb.mp3\" }) { id } }"})
+          body: JSON.stringify({"query": "mutation { createAsset(input: { containerId: \""+tdoID+"\",  assetType: \"media\", contentType: \"video/aac\", uri: \"http://www.transcription411.com/oncology1.mp3\" }) { id } }"})
         })
         .then(res => {
           const assetID = JSON.parse(res._bodyText).data.createAsset.id;
@@ -205,7 +204,14 @@ class AudioExample extends Component {
           })
           .then(res => {
             const createJobID = JSON.parse(res._bodyText).data.createJob.id;
-            console.log(createJobID);
+            const apiUrl = 'http://54.193.111.5:80/jobs';
+            fetch(apiUrl, {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify({jobID: createJobID, tdoID: tdoID})
+            })
+            .then(res => {
+            });
           });
         });
       });
