@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import { AppRegistry, View, StatusBar } from "react-native";
+import React, {Component} from 'react';
+import { AppRegistry, View, StatusBar } from 'react-native';
 import {
   Button,
   Text,
@@ -21,7 +21,7 @@ import {
   Footer,
   FooterTab,
   Label
-} from "native-base";
+} from 'native-base';
 
 export default class JadeChat extends Component {
   render() {
@@ -41,7 +41,7 @@ export default class JadeChat extends Component {
           <Button
             rounded
             success
-            style={{ marginTop: 20, alignSelf: "center" }}>
+            style={{ marginTop: 20, alignSelf: 'center' }}>
             <Text>Goto Nine Profile</Text>
           </Button>
         </Content>

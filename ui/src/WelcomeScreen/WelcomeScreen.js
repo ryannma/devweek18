@@ -43,7 +43,7 @@ export class WelcomeScreen extends Component {
               <Input/>
             </Item>
             <Button primary
-                    onPress={() => this.props.navigation.navigate("Patient")}>
+                    onPress={() => this.props.navigation.navigate('Patient')}>
               <Text> Log In </Text>
             </Button>
           </Form>
