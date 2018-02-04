@@ -28,11 +28,25 @@ export default class PatientScreen extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       let resultArray = [];
+      let pendingCount = 0;
+      let runningCount = 0;
       responseJson.forEach(row => {
         if (row.result) {
           resultArray.push({id: row.id, jobID: row.jobID, tdoID: row.tdoID, link: row.result});
         }
+        else if (row.status === 'pending') {
+          pendingCount += 1;
+        }
+        else if (row.status === 'running') {
+          runningCount += 1;
+        }
       });
+      if (runningCount > 0) {
+        resultArray.push({link: runningCount + ' jobs are currently running'});
+      }
+      if (pendingCount > 0) {
+        resultArray.push({link: pendingCount + ' jobs are currently pending'});
+      }
       this.setState({
         results: resultArray,
         isLoading: false
@@ -64,6 +78,10 @@ export default class PatientScreen extends Component {
 
   _toggleModal() {
     this.setState({ isVisible: !this.state.isVisible });
+  }
+
+  refresh(e) {
+    this.fetchJobs();
   }
 
   render() {
@@ -101,6 +119,13 @@ export default class PatientScreen extends Component {
                   <Body>
                     <Text>Discussions</Text>
                   </Body>
+                  <Right>
+                    <Button transparent
+                            onPress={this.refresh.bind(this)}
+                            style={{height:15}}>
+                      <Icon name='refresh'/>
+                    </Button>
+                  </Right>
                 </CardItem>
               </Card>
               <Card>
