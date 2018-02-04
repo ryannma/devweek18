@@ -12,7 +12,7 @@ export default class PatientScreen extends Component {
       isLoading: true,
       results: [],
       isVisible: false,
-      modalContent: ''
+      modalContent: []
     }
   }
 
