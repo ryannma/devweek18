@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, View, TouchableOpacity } from 'react-native';
 import { Container, Header, Link, Title, Left, Icon, Right, Button, Body, Content,Text, Card, CardItem } from 'native-base';
+import Modal from "react-native-modal";
+const DomParser = require('react-native-html-parser').DOMParser;
 
 export default class PatientScreen extends Component {
 
@@ -9,6 +11,8 @@ export default class PatientScreen extends Component {
     this.state = {
       isLoading: true,
       results: [],
+      isVisible: false,
+      modalContent: ''
     }
   }
 
@@ -24,7 +28,6 @@ export default class PatientScreen extends Component {
     .then((response) => response.json())
     .then((responseJson) => {
       let resultArray = [];
-      console.log(JSON.stringify(responseJson, null, 2));
       responseJson.forEach(row => {
         if (row.result) {
           resultArray.push({id: row.id, jobID: row.jobID, tdoID: row.tdoID, link: row.result});
@@ -34,16 +37,6 @@ export default class PatientScreen extends Component {
         results: resultArray,
         isLoading: false
       });
-      // for (var i=0; i<responseJson.length; i++) {
-      //   if (responseJson[i].result !== null) {
-      //     this.state.results.push(
-      //       <Button title="Click me" 
-      //               key={i}
-      //               onPress={ ()=>{ Linking.openURL('https://google.com')}}/>
-      //     );
-      //   }
-      // }
-      // this.state.isLoading=false;
     })
     .catch((error) => {
       console.error(error);
@@ -54,7 +47,23 @@ export default class PatientScreen extends Component {
     const val = e._targetInst.memoizedProps.value;
     const endIndex = val.indexOf('.ttml');
 
-    console.log(val.substring(0, endIndex+5));
+    fetch(val.substring(0, endIndex+5))
+      .then(res => {
+        const doc = new DomParser().parseFromString(res._bodyText, 'text/html');
+        const lines = doc.getElementsByTagName('p');
+        let text = [];
+        for (let i = 0; i < lines.length; i++) {
+          text.push(lines[i].childNodes[0].data)
+        }
+        this.setState({
+          isVisible: true,
+          modalContent: text
+        });
+      });
+  }
+
+  _toggleModal() {
+    this.setState({ isVisible: !this.state.isVisible });
   }
 
   render() {
@@ -73,30 +82,44 @@ export default class PatientScreen extends Component {
             </Body>
           </Header>
           <Content padder>
+            <View style={{flex: 1}}>
+              <Modal isVisible={this.state.isVisible}
+                     onBackdropPress={()=>this.setState({isVisible: false})}>
+                <Card>
+                  {this.state.modalContent.map((text, index) => {
+                    return (
+                      <CardItem key={index}>
+                        <Text>- {text.substring(0, 200)}</Text>
+                      </CardItem>
+                    )
+                  })}
+                </Card>
+              </Modal>
+            </View>
             <Card>
-              <CardItem>
-                <Body>
-                  <Text>Discussions</Text>
-                </Body>
-              </CardItem>
-            </Card>
-            <Card>
-            {this.state.results.map((result, index) => {
-              return (
-                <CardItem key={index}>
-                  <Button transparent
-                          info
-                          onPress={this.selectLink.bind(this)}
-                          value={result.link}>
-                    <Text>{result.link.substring(0, 35)+'...'}</Text>
-                  </Button>
-                  <Right>
-                      <Icon name='arrow-forward'/>
-                    </Right>
+                <CardItem>
+                  <Body>
+                    <Text>Discussions</Text>
+                  </Body>
                 </CardItem>
-                );
-            })}
-            </Card>
+              </Card>
+              <Card>
+              {this.state.results.map((result, index) => {
+                return (
+                  <CardItem key={index}>
+                    <Button transparent
+                            info
+                            onPress={this.selectLink.bind(this)}
+                            value={result.link}>
+                      <Text>{result.link.substring(0, 35)+'...'}</Text>
+                    </Button>
+                    <Right>
+                        <Icon name='arrow-forward'/>
+                      </Right>
+                  </CardItem>
+                  );
+              })}
+              </Card>
           </Content>
         </Container>
       );
