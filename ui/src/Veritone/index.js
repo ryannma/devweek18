@@ -175,6 +175,36 @@ class AudioExample extends Component {
 
     _finishRecording(didSucceed, filePath) {
       this.setState({ finished: didSucceed });
+      const url = 'https://api.veritone.com/v3/graphql';
+
+      // Create the TDO Object
+      fetch(url, {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer 23ff3a:c04594f5024a4b949b966e91caf7ae55aa5695c3be754bb888d064e73b490f10',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"query": "mutation {createTDO(input: { startDateTime: \"2018-01-01T10:00:00\"stopDateTime: \"2018-01-01T11:00:00\"}) { id startDateTime stopDateTime}}"})
+      })
+      .then(res => {
+        const tdoID = JSON.parse(res._bodyText).data.createTDO.id;
+
+        // Upload the file
+        // JSON.stringify({"query": "mutation { createAsset(input: { containerId: \"52359027\",  assetType: \"media\", contentType: \"video/aac\", uri: \"<file path goes here>\" }) { id } }"})
+        console.log(tdoID);
+      })
+      // const data = new FormData();
+      // data.append('file', {
+      //   uri: filePath,
+      //   type: 'media', // or photo.type
+      //   name: 'audioRecording'
+      // });
+      // fetch(url, {
+      //   method: 'post',
+      //   body: data
+      // }).then(res => {
+      //   console.log(res)
+      // });
       console.log(`Finished recording of duration ${this.state.currentTime} seconds at path: ${filePath}`);
     }
 
