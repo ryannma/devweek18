@@ -18,7 +18,7 @@ export default class AgoraComponent extends Component<{}> {
     // var reactTag = findNodeHandle(this._surfaceView);
     //Alert.alert(reactTag + '')
 
-    RtcEnine.setupLocalVideo(this._localView, 240, 320, 0)
+    RtcEnine.setupLocalVideo(this._localView, 480, 340, 0)
     RtcEnine.callAPI('startPreview', [])
     //token, channelName, String optionalInfo, int optionalUid
     RtcEnine.callAPI('joinChannel', ['', 'react', '', 0])
@@ -28,6 +28,10 @@ export default class AgoraComponent extends Component<{}> {
     AgoraModule.startPreview();
     AgoraModule.joinChannel();
     */
+  }
+
+  _leaveChannel() {
+  	RtcEnine.callAPI('leaveChannel', [])
   }
 
   render() {
@@ -44,7 +48,7 @@ export default class AgoraComponent extends Component<{}> {
       },
       'onUserJoined': (uid, elapsed) => {
       	console.log('user joined');
-        RtcEnine.setupRemoteVideo(this._remoteView1, 96, 96, uid)
+        RtcEnine.setupRemoteVideo(this._remoteView1, 480, 340, uid)
       },
       'onUserOffline': (uid, reason) => {
       },
@@ -59,28 +63,39 @@ export default class AgoraComponent extends Component<{}> {
     };
 
     return (
-      <View style={styles.container}>
+      <Container>
+      	<Header>
+	        <Body>
+	          <Title>Doctor Connect via Agora.io</Title>
+	        </Body>
+	      </Header>
         <SurfaceView 
-          style = { {width: 240, height: 320}}
+          style = { {width: 480, height: 280}}
           ref={component => this._localView = component}
         />
-        <View style={styles.remote}>
-          <SurfaceView 
-            style = { {width: 96, height: 96}}
-            ref={component => this._remoteView1 = component}
-          />
-        </View>
-        <Button
+        <SurfaceView 
+          style = { {width: 480, height: 280}}
+          ref={component => this._remoteView1 = component}
+        />
+        <Button style={styles.buttons}
           onPress={this._joinChannel.bind(this)}
           title='Join Channel'
           color='#841584'
         />
-      </View>
+        <Button style={styles.buttons}
+          onPress={this._leaveChannel.bind(this)}
+          title='Leave Channel'
+          color='#841584'
+        />
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
+	buttons: {
+		flexDirection: 'row',
+	},
   container: {
     flex: 1,
     flexDirection: 'column',
